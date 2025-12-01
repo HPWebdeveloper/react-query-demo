@@ -1,7 +1,7 @@
 export default function GithubCorner() {
   return (
     <a
-      href="https://github.com/HPWebdeveloper/fetching-react-query-experiment"
+      href="https://github.com/HPWebdeveloper/react-query"
       target="_blank"
       rel="noopener noreferrer"
       className="absolute top-0 right-0 z-10"
