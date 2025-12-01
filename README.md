@@ -1,4 +1,4 @@
-# React Query (TanStack Query) Experiment
+# React Query (TanStack Query) demo
 
 This repository demonstrates data fetching patterns in React, comparing traditional fetch methods with React Query, and showcasing React Query's powerful caching capabilities.
 
