@@ -118,7 +118,7 @@ export default function InteractiveGuide() {
       <h2 id="guide-heading" className="text-3xl font-semibold mb-2">
         📖 How to Use This React Query Demo
       </h2>
-      <p className="text-gray-400 mb-8 text-sm">
+      <p className="text-gray-400 mb-8 text-base">
         Follow these 10 steps to explore React Query's complete caching
         lifecycle — from the first fetch, through stale time and cache sharing,
         all the way to garbage collection. Each step explains{" "}
@@ -156,7 +156,7 @@ export default function InteractiveGuide() {
                       {step.number}
                     </span>
                     <h3
-                      className={`font-semibold ${
+                      className={`font-semibold text-base md:text-lg ${
                         isOpen ? "text-purple-300" : "text-gray-200"
                       }`}
                     >
@@ -174,28 +174,28 @@ export default function InteractiveGuide() {
               </button>
 
               {isOpen && (
-                <div className="mt-1 ml-11 space-y-3 p-4 text-sm">
+                <div className="mt-1 ml-11 space-y-4 p-4 text-base">
                   <div>
-                    <span className="text-xs font-semibold uppercase tracking-wider text-gray-500">
-                      UI Element
+                    <span className="text-sm font-semibold uppercase tracking-wider text-yellow-400">
+                      🖱️ UI Element
                     </span>
                     <p className="text-purple-300 mt-1">{step.element}</p>
                   </div>
                   <div>
-                    <span className="text-xs font-semibold uppercase tracking-wider text-gray-500">
-                      Action
+                    <span className="text-sm font-semibold uppercase tracking-wider text-yellow-400">
+                      ⚡ Action
                     </span>
                     <p className="text-gray-300 mt-1">{step.action}</p>
                   </div>
                   <div>
-                    <span className="text-xs font-semibold uppercase tracking-wider text-gray-500">
-                      What to Expect
+                    <span className="text-sm font-semibold uppercase tracking-wider text-yellow-400">
+                      👀 What to Expect
                     </span>
                     <p className="text-green-300 mt-1">{step.expectation}</p>
                   </div>
                   <div className="bg-blue-900/20 border border-blue-800/30 rounded-lg p-3">
-                    <span className="text-xs font-semibold uppercase tracking-wider text-blue-400">
-                      React Query Concept
+                    <span className="text-sm font-semibold uppercase tracking-wider text-yellow-400">
+                      🧠 React Query Concept
                     </span>
                     <p className="text-blue-200 mt-1">{step.concept}</p>
                   </div>
@@ -210,7 +210,7 @@ export default function InteractiveGuide() {
         <h3 className="font-semibold text-gray-200 mb-3">
           💡 Tips for Getting the Most Out of This Demo
         </h3>
-        <ul className="space-y-2 text-sm text-gray-400">
+        <ul className="space-y-2 text-base text-gray-400">
           <li>
             <strong className="text-white">Open the browser console</strong> (F12
             → Console) to see exactly when real API calls happen versus when data
