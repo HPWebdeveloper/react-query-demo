@@ -1,6 +1,7 @@
 import "./App.css";
 import Banner from "./components/Banner";
 import CacheDemo from "./components/CacheDemo";
+import InteractiveGuide from "./components/InteractiveGuide";
 
 function App() {
   return (
@@ -12,6 +13,9 @@ function App() {
         <article>
           <CacheDemo />
         </article>
+        <section aria-label="Step-by-step guide to using the React Query demo">
+          <InteractiveGuide />
+        </section>
       </main>
       <footer className="text-center text-gray-500 text-xs py-6">
         <p>
