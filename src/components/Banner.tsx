@@ -21,9 +21,9 @@ export default function Banner() {
           </a>
         </p>
         <p className="text-sm md:text-base opacity-90 mb-2">
-          Explore how React Query (TanStack Query) handles caching, stale time,
-          gcTime, garbage collection, and background refetching — all visualized
-          in real time
+          Explore how React Query (TanStack Query) handles caching, state
+          management, data-sync, stale time, gcTime, garbage collection, and
+          background refetching — all visualized in real time
         </p>
         <p className="text-xs md:text-sm">
           Powered by{" "}
