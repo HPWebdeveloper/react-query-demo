@@ -1,0 +1,16 @@
+{
+  "short_name": "React Query Demo",
+  "name": "React Query Demo – Interactive Cache & Data-Fetching Visualizer",
+  "description": "An interactive demo that visualizes React Query (TanStack Query) caching, stale time, gcTime, garbage collection, and background refetching.",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#7c3aed",
+  "background_color": "#111827",
+  "icons": [
+    {
+      "src": "/vite.svg",
+      "type": "image/svg+xml",
+      "sizes": "any"
+    }
+  ]
+}

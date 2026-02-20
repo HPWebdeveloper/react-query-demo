@@ -2,12 +2,154 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>fetching</title>
+
+    <!-- Primary Meta Tags -->
+    <title>
+      React Query Demo – Interactive Cache, Stale Time & Garbage Collection
+      Visualizer
+    </title>
+    <meta
+      name="title"
+      content="React Query Demo – Interactive Cache, Stale Time & Garbage Collection Visualizer"
+    />
+    <meta
+      name="description"
+      content="Explore React Query (TanStack Query) caching in action. This interactive demo visualizes stale time, cache time (gcTime), garbage collection, background refetching, and data synchronization — helping you master React Query's data-fetching lifecycle."
+    />
+    <meta
+      name="keywords"
+      content="React Query, TanStack Query, React Query demo, React Query cache, React Query stale time, React Query gcTime, React Query garbage collection, useQuery, data fetching React, React Query tutorial, React Query example, React Query visualization, cache invalidation, background refetching, React server state, React data sync"
+    />
+    <meta name="author" content="Hamed Panjeh" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://react-query.dev/" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://react-query.dev/" />
+    <meta
+      property="og:title"
+      content="React Query Demo – Interactive Cache & Data-Fetching Visualizer"
+    />
+    <meta
+      property="og:description"
+      content="See how React Query (TanStack Query) manages caching, stale time, gcTime, garbage collection, and background refetching in a live interactive demo."
+    />
+    <meta property="og:image" content="https://react-query.dev/og-image.png" />
+    <meta property="og:site_name" content="React Query Demo" />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://react-query.dev/" />
+    <meta
+      name="twitter:title"
+      content="React Query Demo – Interactive Cache & Data-Fetching Visualizer"
+    />
+    <meta
+      name="twitter:description"
+      content="See how React Query (TanStack Query) manages caching, stale time, gcTime, garbage collection, and background refetching in a live interactive demo."
+    />
+    <meta name="twitter:image" content="https://react-query.dev/og-image.png" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="apple-touch-icon" href="/vite.svg" />
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#7c3aed" />
+
+    <!-- Structured Data: WebApplication -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "React Query Demo",
+        "url": "https://react-query.dev/",
+        "description": "An interactive visualization that makes React Query's caching, stale time, garbage collection, and data-sync behavior easy to grasp at a glance.",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Any",
+        "author": {
+          "@type": "Person",
+          "name": "Hamed Panjeh",
+          "url": "https://www.linkedin.com/in/hpwebdeveloper/"
+        },
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        },
+        "keywords": "React Query, TanStack Query, cache demo, data fetching, useQuery, stale time, gcTime, garbage collection"
+      }
+    </script>
+
+    <!-- Structured Data: FAQPage (helps win rich snippets) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is React Query stale time?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Stale time (staleTime) is the duration data is considered fresh after being fetched. During this window React Query won't refetch the data automatically. Once stale time expires, the data is marked stale and may be refetched on the next trigger (window focus, component mount, etc.)."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is React Query gcTime (cache time)?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "gcTime (formerly cacheTime) controls how long inactive (unused) query data stays in the cache before being garbage collected. Even after a component unmounts, the cached data remains available for this duration so remounting is instant."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How does React Query garbage collection work?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "When a query has no active observers (no mounted components using it), React Query starts a garbage collection timer equal to gcTime. If the query isn't used again before the timer expires, the cached data is permanently removed from memory."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is the difference between isLoading and isFetching in React Query?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "isLoading is true only on the very first fetch when there is no cached data. isFetching is true whenever a network request is in flight, including background refetches. This means isFetching can be true while isLoading is false when stale data is being refreshed behind the scenes."
+            }
+          }
+        ]
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>
+
+    <!-- Noscript fallback for search-engine crawlers that don't execute JS -->
+    <noscript>
+      <h1>React Query Demo – Interactive Cache Visualizer</h1>
+      <p>
+        This interactive demo by Hamed Panjeh visualizes React Query (TanStack
+        Query) caching, stale time, gcTime, garbage collection, and background
+        refetching to help developers understand data-fetching lifecycle at a
+        glance.
+      </p>
+      <p>
+        Features: live cache countdown timers, mount/unmount simulation, user
+        data fetching, stale vs fresh indicators, and garbage collection
+        monitoring.
+      </p>
+      <p>
+        Visit <a href="https://react-query.dev/">react-query.dev</a> with
+        JavaScript enabled to explore the full interactive experience.
+      </p>
+    </noscript>
+
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
