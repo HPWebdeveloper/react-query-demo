@@ -7,9 +7,9 @@ const steps = [
     element: "User 1 / User 2 / User 3 buttons",
     action: "Click one of the three user buttons at the top of the demo.",
     expectation:
-      "React Query fetches data from the server for the first time. You'll see the status indicator show \"⏳ Loading (First fetch)\" briefly, then the user card appears with name, email, and the server timestamp. A stale-time countdown (30 s) starts immediately.",
+      'React Query fetches data from the server for the first time. You\'ll see the status indicator show "⏳ Loading (First fetch)" briefly, then the user card appears with name, email, and the server timestamp. A stale-time countdown (30 s) starts immediately.',
     concept:
-      "This triggers useQuery with queryKey [\"user\", userId]. Since the cache is empty for this user, React Query makes a real network request.",
+      'This triggers useQuery with queryKey ["user", userId]. Since the cache is empty for this user, React Query makes a real network request.',
   },
   {
     number: 2,
@@ -20,7 +20,7 @@ const steps = [
     expectation:
       "A new API call is made because User 2 has never been fetched. The stale-time countdown resets for User 2. User 1's data stays in the cache — its garbage-collection countdown (60 s) begins quietly in the background.",
     concept:
-      "Each user has its own cache entry keyed by [\"user\", userId]. Switching users doesn't discard the old cache.",
+      'Each user has its own cache entry keyed by ["user", userId]. Switching users doesn\'t discard the old cache.',
   },
   {
     number: 3,
@@ -29,7 +29,7 @@ const steps = [
     action:
       "Click back on User 1 (or any user you already fetched) within 30 seconds.",
     expectation:
-      "The user card appears instantly with NO loading spinner and NO network request. Open the browser console — no new API call is logged. The status shows \"✅ Cached\".",
+      'The user card appears instantly with NO loading spinner and NO network request. Open the browser console — no new API call is logged. The status shows "✅ Cached".',
     concept:
       "The data is still within its staleTime (30 s), so React Query considers it fresh and serves it straight from the in-memory cache.",
   },
@@ -39,24 +39,24 @@ const steps = [
     element: "Stale-time countdown panel",
     action: "Watch the blue stale-time countdown reach 0 s.",
     expectation:
-      "The countdown label turns orange and reads \"STALE\". The data is still displayed, but React Query now considers it outdated. No refetch happens automatically at this moment — React Query waits for a trigger.",
+      'The countdown label turns orange and reads "STALE". The data is still displayed, but React Query now considers it outdated. No refetch happens automatically at this moment — React Query waits for a trigger.',
     concept:
       "After staleTime expires, the cached data is marked stale. It remains usable, but the next trigger (component mount, window focus, or manual refetch) will cause a background refetch.",
   },
   {
     number: 5,
     title: "Show the Child Component (Cache Sharing)",
-    element: "\"Show Child Component\" button inside the user card",
-    action: "Click the purple \"Show Child Component\" button.",
+    element: '"Show Child Component" button inside the user card',
+    action: 'Click the purple "Show Child Component" button.',
     expectation:
       "A child component appears below the user card showing the same user's name and email. If the data is still fresh, no network request is made at all. If the data is stale, React Query silently refetches in the background while instantly displaying the stale cached data.",
     concept:
-      "Both the parent (UserDataDisplay) and the child (ChildComponent) use the same queryKey [\"user\", userId]. React Query deduplicates requests and shares the same cache entry between all components that subscribe to the same key.",
+      'Both the parent (UserDataDisplay) and the child (ChildComponent) use the same queryKey ["user", userId]. React Query deduplicates requests and shares the same cache entry between all components that subscribe to the same key.',
   },
   {
     number: 6,
     title: "Hide the Child Component",
-    element: "\"Hide Child Component\" button",
+    element: '"Hide Child Component" button',
     action: "Click the button again to hide the child component.",
     expectation:
       "The child component disappears. The observer count for that query drops by one, but the parent still observes it, so no garbage-collection countdown starts.",
@@ -66,19 +66,19 @@ const steps = [
   {
     number: 7,
     title: "Unmount the Component",
-    element: "\"🔴 Unmount Component\" button",
-    action: "Click the orange \"Unmount Component\" button.",
+    element: '"🔴 Unmount Component" button',
+    action: 'Click the orange "Unmount Component" button.',
     expectation:
       "The user card and all child components disappear. The status indicators reset. Crucially, the garbage-collection countdown (60 s) starts ticking for the current user's cache entry. You can see it counting down in the yellow GC countdown panel.",
     concept:
-      "When the component unmounts, the query has zero observers. React Query keeps the data in cache for gcTime (60 s) before permanently deleting it. This is the \"grace period\" that enables instant re-mounts.",
+      'When the component unmounts, the query has zero observers. React Query keeps the data in cache for gcTime (60 s) before permanently deleting it. This is the "grace period" that enables instant re-mounts.',
   },
   {
     number: 8,
     title: "Re-mount Before GC Expires",
-    element: "\"🟢 Mount Component\" button",
+    element: '"🟢 Mount Component" button',
     action:
-      "Click \"Mount Component\" before the garbage-collection countdown reaches 0.",
+      'Click "Mount Component" before the garbage-collection countdown reaches 0.',
     expectation:
       "The user card reappears instantly with the cached data — no loading spinner, no network request. The GC countdown stops because the query has an observer again. If the data is stale, a silent background refetch happens.",
     concept:
@@ -98,10 +98,10 @@ const steps = [
   {
     number: 10,
     title: "Mount After Garbage Collection",
-    element: "\"🟢 Mount Component\" button",
-    action: "Click \"Mount Component\" after the GC event has been logged.",
+    element: '"🟢 Mount Component" button',
+    action: 'Click "Mount Component" after the GC event has been logged.',
     expectation:
-      "This time you see the \"⏳ Loading\" spinner again and a new API call in the console. The data is fetched from scratch because the cache was garbage collected.",
+      'This time you see the "⏳ Loading" spinner again and a new API call in the console. The data is fetched from scratch because the cache was garbage collected.',
     concept:
       "With the cache entry removed, React Query treats this as a completely new query — demonstrating the full lifecycle from fetch → cache → stale → GC → re-fetch.",
   },
@@ -134,9 +134,7 @@ export default function InteractiveGuide() {
           return (
             <li key={step.number}>
               <button
-                onClick={() =>
-                  setExpandedStep(isOpen ? null : step.number)
-                }
+                onClick={() => setExpandedStep(isOpen ? null : step.number)}
                 className={`w-full text-left rounded-lg p-4 transition-colors ${
                   isOpen
                     ? "bg-purple-900/30 border border-purple-500/50"
@@ -212,9 +210,9 @@ export default function InteractiveGuide() {
         </h3>
         <ul className="space-y-2 text-base text-gray-400">
           <li>
-            <strong className="text-white">Open the browser console</strong> (F12
-            → Console) to see exactly when real API calls happen versus when data
-            is served from cache.
+            <strong className="text-white">Open the browser console</strong>{" "}
+            (F12 → Console) to see exactly when real API calls happen versus
+            when data is served from cache.
           </li>
           <li>
             <strong className="text-white">Watch the countdown timers</strong> —
@@ -226,10 +224,8 @@ export default function InteractiveGuide() {
             users to see how React Query prevents duplicate network requests.
           </li>
           <li>
-            <strong className="text-white">
-              Unmount → wait → re-mount
-            </strong>{" "}
-            at different intervals to feel the difference between instant cache
+            <strong className="text-white">Unmount → wait → re-mount</strong> at
+            different intervals to feel the difference between instant cache
             hits and fresh fetches.
           </li>
         </ul>
