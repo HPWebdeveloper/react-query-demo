@@ -54,61 +54,55 @@ export default function ObserverCount() {
   }, [queryClient]);
 
   return (
-    <div className="mb-6">
-      <h4 className="text-sm font-semibold text-gray-300 mb-3">
-        👁️ Active Observers per Query
-      </h4>
-      <div className="grid grid-cols-3 gap-4">
-        {[1, 2, 3].map((userId) => {
-          const info = data[userId];
-          const hasObservers = info.observers > 0;
+    <div className="grid grid-cols-3 gap-3">
+      {[1, 2, 3].map((userId) => {
+        const info = data[userId];
+        const hasObservers = info.observers > 0;
 
-          return (
+        return (
+          <div
+            key={userId}
+            className={`rounded-lg px-4 py-3 text-center flex-1 ${
+              hasObservers
+                ? "bg-green-900/20 border border-green-700/50"
+                : info.exists
+                  ? "bg-red-900/20 border border-red-700/50"
+                  : "bg-gray-800/50 border border-gray-700"
+            }`}
+          >
+            <div className="text-xs font-semibold text-gray-400 mb-1">
+              👁️ Active Observers
+            </div>
+            <div className="text-xs text-gray-300">User {userId}</div>
             <div
-              key={userId}
-              className={`rounded-lg p-3 text-center ${
+              className={`text-base font-bold my-0.5 ${
                 hasObservers
-                  ? "bg-green-900/20 border border-green-700/50"
+                  ? "text-green-400"
                   : info.exists
-                    ? "bg-red-900/20 border border-red-700/50"
-                    : "bg-gray-800/50 border border-gray-700"
+                    ? "text-red-400"
+                    : "text-gray-400"
               }`}
             >
-              <div className="text-xs text-gray-300 mb-1">User {userId}</div>
-              <div
-                className={`text-2xl font-bold ${
-                  hasObservers
-                    ? "text-green-400"
-                    : info.exists
-                      ? "text-red-400"
-                      : "text-gray-400"
-                }`}
-              >
-                {info.exists ? info.observers : "—"}
-              </div>
-              <div
-                className={`text-xs mt-1 ${
-                  hasObservers
-                    ? "text-green-300"
-                    : info.exists
-                      ? "text-red-300"
-                      : "text-gray-400"
-                }`}
-              >
-                {hasObservers
-                  ? "Cache active"
-                  : info.exists
-                    ? "GC eligible"
-                    : "No cache"}
-              </div>
+              {info.exists ? info.observers : "—"}
             </div>
-          );
-        })}
-      </div>
-      <p className="text-xs text-gray-400 mt-2 text-center">
-        When observers drop to 0, the gcTime countdown begins. Mount the child
-        component to see the count increase.
-      </p>
+            <div
+              className={`text-[10px] ${
+                hasObservers
+                  ? "text-green-300"
+                  : info.exists
+                    ? "text-red-300"
+                    : "text-gray-400"
+              }`}
+            >
+              {hasObservers
+                ? "Active"
+                : info.exists
+                  ? "GC eligible"
+                  : "No cache"}
+            </div>
+          </div>
+        );
+      })}
     </div>
   );
 }

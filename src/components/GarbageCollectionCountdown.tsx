@@ -61,51 +61,38 @@ function GarbageCollectionCountdown() {
     return (
       <div
         key={userId}
-        className={`rounded-lg p-4 ${
+        className={`rounded-lg px-4 py-3 text-center flex-1 ${
           isActive
             ? "bg-yellow-900/20 border border-yellow-700/50"
             : "bg-gray-800/50 border border-gray-700"
         }`}
       >
-        <h5
-          className={`text-xs font-semibold mb-2 ${
+        <div className="text-xs font-semibold text-gray-400 mb-1">
+          ⏳ GC Countdown
+        </div>
+        <div
+          className={`text-xs ${
             isActive ? "text-yellow-400" : "text-gray-300"
           }`}
         >
           User {userId}
-        </h5>
-        <div className="text-center">
-          <div className="text-xs text-gray-300 mb-1">
-            <span className={isActive ? "text-purple-400" : "text-gray-400"}>
-              {data.queryKey || "—"}
-            </span>
-          </div>
-          <div
-            className={`text-2xl font-bold mb-1 ${
-              isActive ? "text-yellow-400" : "text-gray-400"
-            }`}
-          >
-            {isActive ? `${data.countdown}s` : "60s"}
-          </div>
+        </div>
+        <div
+          className={`text-base font-bold my-0.5 ${
+            isActive ? "text-yellow-400" : "text-gray-400"
+          }`}
+        >
+          {isActive ? `${data.countdown}s` : "60s"}
         </div>
       </div>
     );
   };
 
   return (
-    <div className="mb-6">
-      <h4 className="text-sm font-semibold text-gray-300 mb-3">
-        ⏳ Garbage Collection Countdown for queryKey (cache key) = ["user",
-        userId]
-      </h4>
-      <div className="grid grid-cols-3 gap-4">
-        {renderUserCountdown(1)}
-        {renderUserCountdown(2)}
-        {renderUserCountdown(3)}
-      </div>
-      <p className="text-xs text-gray-400 mt-3 text-center">
-        Countdown starts when component is unmounted. Cache removed at 0s.
-      </p>
+    <div className="grid grid-cols-3 gap-3">
+      {renderUserCountdown(1)}
+      {renderUserCountdown(2)}
+      {renderUserCountdown(3)}
     </div>
   );
 }

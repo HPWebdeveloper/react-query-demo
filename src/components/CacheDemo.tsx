@@ -82,7 +82,7 @@ function CacheDemo() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto px-5 py-10 mt-10 border-t-2 border-purple-500">
+    <div className="max-w-6xl mx-auto px-5 py-10 mt-10 border-t-2 border-purple-500">
       <h2 className="text-3xl font-semibold mb-4">
         🗂️ React Query Cache Demo — staleTime, gcTime &amp; Garbage Collection
       </h2>
@@ -97,15 +97,22 @@ function CacheDemo() {
 
       <QueryConfiguration staleTime={staleTime} gcTime={gcTime} />
 
-      <QueryLifecycleFlow />
+      {/* Two-column dashboard: Lifecycle (left) + Monitors (right) */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+        {/* Left column: Query Lifecycle Flow (vertical) */}
+        <div>
+          <QueryLifecycleFlow />
+        </div>
 
-      <ObserverCount />
-
-      <GarbageCollectionCountdown />
+        {/* Right column: Observers + Countdowns stacked, stretch to match left */}
+        <div className="flex flex-col gap-5 justify-between">
+          <ObserverCount />
+          <GarbageCollectionCountdown />
+          <CacheTimeCountdown />
+        </div>
+      </div>
 
       <GarbageCollectionMonitor />
-
-      <CacheTimeCountdown />
 
       <UserSelector selectedUserId={userId} onSelectUser={handleUserSelect} />
 

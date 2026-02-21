@@ -62,7 +62,7 @@ function CacheTimeCountdown() {
     return (
       <div
         key={userId}
-        className={`rounded-lg p-4 ${
+        className={`rounded-lg px-4 py-3 text-center flex-1 ${
           isActive
             ? "bg-blue-900/20 border border-blue-700/50"
             : isStale
@@ -70,8 +70,11 @@ function CacheTimeCountdown() {
               : "bg-gray-800/50 border border-gray-700"
         }`}
       >
-        <h5
-          className={`text-xs font-semibold mb-2 ${
+        <div className="text-xs font-semibold text-gray-400 mb-1">
+          ⏱️ Freshness
+        </div>
+        <div
+          className={`text-xs ${
             isActive
               ? "text-blue-400"
               : isStale
@@ -80,51 +83,27 @@ function CacheTimeCountdown() {
           }`}
         >
           User {userId}
-        </h5>
-        <div className="text-center">
-          <div className="text-xs text-gray-300 mb-1">
-            <span
-              className={
-                isActive
-                  ? "text-purple-400"
-                  : isStale
-                    ? "text-orange-300"
-                    : "text-gray-400"
-              }
-            >
-              {data.queryKey || "—"}
-            </span>
-          </div>
-          <div
-            className={`text-2xl font-bold mb-1 ${
-              isActive
-                ? "text-blue-400"
-                : isStale
-                  ? "text-orange-400"
-                  : "text-gray-400"
-            }`}
-          >
-            {isActive ? `${data.countdown}s` : isStale ? "STALE" : "30s"}
-          </div>
+        </div>
+        <div
+          className={`text-base font-bold my-0.5 ${
+            isActive
+              ? "text-blue-400"
+              : isStale
+                ? "text-orange-400"
+                : "text-gray-400"
+          }`}
+        >
+          {isActive ? `${data.countdown}s` : isStale ? "STALE" : "30s"}
         </div>
       </div>
     );
   };
 
   return (
-    <div className="mb-6">
-      <h4 className="text-sm font-semibold text-gray-300 mb-3">
-        ⏱️ Cache Freshness Countdown (staleTime)
-      </h4>
-      <div className="grid grid-cols-3 gap-4">
-        {renderUserCountdown(1)}
-        {renderUserCountdown(2)}
-        {renderUserCountdown(3)}
-      </div>
-      <p className="text-xs text-gray-400 mt-3 text-center">
-        Data is fresh for 30s after fetch. At 0s, data becomes stale and will
-        refetch on next access.
-      </p>
+    <div className="grid grid-cols-3 gap-3">
+      {renderUserCountdown(1)}
+      {renderUserCountdown(2)}
+      {renderUserCountdown(3)}
     </div>
   );
 }

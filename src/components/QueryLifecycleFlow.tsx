@@ -157,22 +157,22 @@ export default function QueryLifecycleFlow() {
     const lifecycle = lifecycles[userId];
 
     return (
-      <div key={userId} className="mb-4">
-        <div className="text-xs font-semibold text-gray-300 mb-2">
+      <div key={userId} className="flex-1">
+        <div className="text-xs font-semibold text-gray-300 mb-2 text-center">
           User {userId}
           {lifecycle.queryKey && (
-            <span className="text-purple-400 font-mono ml-2">
+            <span className="text-purple-400 font-mono ml-1 text-[10px]">
               {lifecycle.queryKey}
             </span>
           )}
         </div>
-        <div className="flex items-center gap-0.5">
+        <div className="flex flex-col items-center gap-1">
           {stageOrder.map((stage, i) => {
             const config = stageConfig[stage];
             const isActive = lifecycle.stage === stage;
 
             return (
-              <div key={stage} className="flex items-center">
+              <div key={stage} className="flex flex-col items-center">
                 {/* Stage node */}
                 <div
                   className={`relative flex flex-col items-center transition-all duration-300 ${
@@ -180,7 +180,7 @@ export default function QueryLifecycleFlow() {
                   }`}
                 >
                   <div
-                    className={`w-7 h-7 md:w-8 md:h-8 rounded-full flex items-center justify-center text-xs border-2 transition-all duration-300 ${
+                    className={`w-6 h-6 rounded-full flex items-center justify-center text-[10px] border-2 transition-all duration-300 ${
                       isActive
                         ? `${config.dotColor} border-white/50 shadow-lg`
                         : "bg-gray-700 border-gray-600"
@@ -189,17 +189,17 @@ export default function QueryLifecycleFlow() {
                     {isActive ? config.emoji : ""}
                   </div>
                   <span
-                    className={`text-[10px] mt-1 whitespace-nowrap ${
+                    className={`text-[9px] mt-0.5 whitespace-nowrap ${
                       isActive ? config.color + " font-bold" : "text-gray-500"
                     }`}
                   >
                     {config.label}
                   </span>
                 </div>
-                {/* Connector line */}
+                {/* Connector line (vertical) */}
                 {i < stageOrder.length - 1 && (
                   <div
-                    className={`w-3 md:w-5 h-0.5 mx-0.5 transition-colors duration-300 ${
+                    className={`w-0.5 h-2 transition-colors duration-300 ${
                       isActive ? config.dotColor : "bg-gray-600"
                     }`}
                   />
@@ -213,18 +213,19 @@ export default function QueryLifecycleFlow() {
   };
 
   return (
-    <div className="mb-6">
+    <div className="mb-0">
       <h4 className="text-sm font-semibold text-gray-300 mb-3">
         🔀 Query Lifecycle Flow
       </h4>
       <div className="bg-gray-800/50 border border-gray-700 rounded-lg p-4">
-        {renderPipeline(1)}
-        {renderPipeline(2)}
-        {renderPipeline(3)}
+        <div className="flex gap-2">
+          {renderPipeline(1)}
+          {renderPipeline(2)}
+          {renderPipeline(3)}
+        </div>
       </div>
       <p className="text-xs text-gray-400 mt-2 text-center">
-        Each query moves through the lifecycle: No Data → Fetching → Fresh →
-        Stale → GC Pending → Collected.
+        No Data → Fetching → Fresh → Stale → GC Pending → Collected
       </p>
     </div>
   );
