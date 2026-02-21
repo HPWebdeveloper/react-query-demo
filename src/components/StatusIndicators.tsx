@@ -21,15 +21,15 @@ function StatusIndicators({
               isLoading
                 ? "text-yellow-400"
                 : isFetching
-                ? "text-blue-400"
-                : "text-green-400"
+                  ? "text-blue-400"
+                  : "text-green-400"
             }
           >
             {isLoading
               ? "⏳ Loading (First fetch)"
               : isFetching
-              ? "🔄 Refetching (Background)"
-              : "✅ Cached"}
+                ? "🔄 Refetching (Background)"
+                : "✅ Cached"}
           </span>
         </div>
         <div>

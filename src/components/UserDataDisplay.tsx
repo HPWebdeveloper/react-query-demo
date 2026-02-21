@@ -18,7 +18,7 @@ interface UserDataDisplayProps {
     fetchedAtTime: string | undefined,
     isLoading: boolean,
     isFetching: boolean,
-    dataUpdatedAt: number | undefined
+    dataUpdatedAt: number | undefined,
   ) => void;
 }
 

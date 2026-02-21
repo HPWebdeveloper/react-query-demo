@@ -66,8 +66,8 @@ function CacheTimeCountdown() {
           isActive
             ? "bg-blue-900/20 border border-blue-700/50"
             : isStale
-            ? "bg-orange-900/20 border border-orange-700/50"
-            : "bg-gray-800/50 border border-gray-700"
+              ? "bg-orange-900/20 border border-orange-700/50"
+              : "bg-gray-800/50 border border-gray-700"
         }`}
       >
         <h5
@@ -75,8 +75,8 @@ function CacheTimeCountdown() {
             isActive
               ? "text-blue-400"
               : isStale
-              ? "text-orange-400"
-              : "text-gray-300"
+                ? "text-orange-400"
+                : "text-gray-300"
           }`}
         >
           User {userId}
@@ -88,8 +88,8 @@ function CacheTimeCountdown() {
                 isActive
                   ? "text-purple-400"
                   : isStale
-                  ? "text-orange-300"
-                  : "text-gray-400"
+                    ? "text-orange-300"
+                    : "text-gray-400"
               }
             >
               {data.queryKey || "—"}
@@ -100,8 +100,8 @@ function CacheTimeCountdown() {
               isActive
                 ? "text-blue-400"
                 : isStale
-                ? "text-orange-400"
-                : "text-gray-400"
+                  ? "text-orange-400"
+                  : "text-gray-400"
             }`}
           >
             {isActive ? `${data.countdown}s` : isStale ? "STALE" : "30s"}
