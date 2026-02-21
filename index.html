@@ -146,62 +146,62 @@
           {
             "@type": "HowToStep",
             "position": 1,
-            "name": "Select a User",
-            "text": "Click one of the three user buttons (User 1, User 2, or User 3). React Query fetches data from the server for the first time. The status shows Loading, then the user card appears and a 30-second stale-time countdown begins."
+            "name": "Mount Your First User",
+            "text": "Click the green Mount button on any user card (e.g. User 1). React Query fetches data from the server for the first time. The status shows Loading, then the user's name, email, status, and server timestamp appear. A 30-second stale-time countdown begins."
           },
           {
             "@type": "HowToStep",
             "position": 2,
-            "name": "Switch to Another User",
-            "text": "Click a different user button. A new API call is made for the new user while the previous user's data remains cached. The garbage-collection countdown starts for the previous user's cache entry."
+            "name": "Mount a Second User",
+            "text": "While User 1 is still mounted, click Mount on User 2. A new API call is made for User 2. Both users are mounted simultaneously with independent data, statuses, and countdowns."
           },
           {
             "@type": "HowToStep",
             "position": 3,
-            "name": "Switch Back to a Previously Fetched User",
-            "text": "Click back on a user you already fetched within 30 seconds. The data appears instantly from cache with no network request — the console confirms no API call was made."
+            "name": "Unmount and Re-mount While Fresh",
+            "text": "Click Unmount on User 1, then immediately click Mount again within 30 seconds. Data appears instantly from cache with no network request — the console confirms no API call was made."
           },
           {
             "@type": "HowToStep",
             "position": 4,
-            "name": "Wait for Data to Become Stale",
-            "text": "Watch the blue stale-time countdown reach 0. The label turns orange and reads STALE. The cached data is still displayed but is now considered outdated by React Query."
+            "name": "Watch Data Become Stale",
+            "text": "Keep a user mounted and watch the blue freshness countdown reach 0. The label turns orange and reads STALE. The cached data is still displayed but is now considered outdated by React Query."
           },
           {
             "@type": "HowToStep",
             "position": 5,
             "name": "Show the Child Component (Cache Sharing)",
-            "text": "Click the purple Show Child Component button. A child component appears using the same cached data with the same queryKey — no duplicate network request is made."
+            "text": "Click the purple Show Child Component button inside any mounted user's card. A child component appears using the same cached data with the same queryKey — no duplicate network request is made. The observer count increases to 2."
           },
           {
             "@type": "HowToStep",
             "position": 6,
             "name": "Hide the Child Component",
-            "text": "Click the button again to hide the child. The observer count drops but the parent still observes the query, so no garbage-collection countdown starts."
+            "text": "Click the button again to hide the child. The observer count drops back to 1 but the parent still observes the query, so no garbage-collection countdown starts."
           },
           {
             "@type": "HowToStep",
             "position": 7,
-            "name": "Unmount the Component",
-            "text": "Click the orange Unmount Component button. The user card disappears and the 60-second garbage-collection countdown begins in the GC countdown panel."
+            "name": "Unmount a User",
+            "text": "Click the Unmount button on a specific user's card. That user's data disappears and the 60-second garbage-collection countdown begins. Other mounted users are not affected."
           },
           {
             "@type": "HowToStep",
             "position": 8,
             "name": "Re-mount Before GC Expires",
-            "text": "Click Mount Component before the GC countdown reaches 0. The data reappears instantly from cache with no loading spinner, demonstrating gcTime's grace period."
+            "text": "Click Mount on the same user before the GC countdown reaches 0. The data reappears instantly from cache with no loading spinner, demonstrating gcTime's grace period."
           },
           {
             "@type": "HowToStep",
             "position": 9,
             "name": "Let Garbage Collection Remove the Cache",
-            "text": "Unmount and wait the full 60 seconds. The Garbage Collection Monitor logs a removal event, confirming the cache entry has been permanently deleted."
+            "text": "Unmount a user and wait the full 60 seconds. The Garbage Collection Events panel logs a removal event, confirming the cache entry has been permanently deleted."
           },
           {
             "@type": "HowToStep",
             "position": 10,
             "name": "Mount After Garbage Collection",
-            "text": "Click Mount Component after the GC event. You see the Loading spinner again and a fresh API call in the console — the full fetch-cache-stale-GC lifecycle is complete."
+            "text": "Click Mount on the user whose cache was collected. You see the Loading state again and a fresh API call — the full fetch-cache-stale-GC lifecycle is complete."
           }
         ]
       }
@@ -227,45 +227,50 @@
       <h2>How to Use This React Query Demo</h2>
       <ol>
         <li>
-          <strong>Select a User</strong> — Click User 1, 2, or 3 to fetch data.
-          React Query makes a real API call and starts a 30-second stale-time
-          countdown.
+          <strong>Mount Your First User</strong> — Click the green "Mount"
+          button on any user's card. React Query makes a real API call and
+          starts a 30-second stale-time countdown.
         </li>
         <li>
-          <strong>Switch Users</strong> — Click a different user. The previous
-          user's data stays cached while a new fetch occurs.
+          <strong>Mount a Second User</strong> — Mount another user while the
+          first is still active. Both run independently with their own data and
+          countdowns.
         </li>
         <li>
-          <strong>Switch Back</strong> — Return to a previously fetched user
-          within 30 seconds. Data loads instantly from cache—no network request.
+          <strong>Unmount and Re-mount While Fresh</strong> — Unmount a user,
+          then re-mount within 30 seconds. Data loads instantly from
+          cache—no network request.
         </li>
         <li>
-          <strong>Wait for Stale</strong> — After 30 seconds the data becomes
-          stale (orange). React Query will refetch on the next trigger.
+          <strong>Watch Data Become Stale</strong> — After 30 seconds the data
+          becomes stale (orange). React Query will refetch on the next
+          trigger.
         </li>
         <li>
           <strong>Show Child Component</strong> — Click "Show Child Component"
-          to see cache sharing. Both parent and child use the same cached data.
+          inside a mounted user's card to see cache sharing. Parent and child
+          use the same cached data—observer count increases.
         </li>
         <li>
           <strong>Hide Child Component</strong> — Hiding the child reduces the
           observer count but the cache remains active.
         </li>
         <li>
-          <strong>Unmount</strong> — Click "Unmount Component" to remove the UI.
-          The 60-second garbage-collection countdown begins.
+          <strong>Unmount a User</strong> — Click "Unmount" on a user's card.
+          The 60-second garbage-collection countdown begins for that user
+          only.
         </li>
         <li>
-          <strong>Re-mount Before GC</strong> — Mount again before 60 seconds.
-          Cached data appears instantly.
+          <strong>Re-mount Before GC</strong> — Mount the user again before 60
+          seconds. Cached data appears instantly.
         </li>
         <li>
           <strong>Wait for Garbage Collection</strong> — Let the GC timer
           expire. The cache is permanently removed.
         </li>
         <li>
-          <strong>Mount After GC</strong> — Mount again after GC. A fresh API
-          call is made—completing the full lifecycle.
+          <strong>Mount After GC</strong> — Mount the user again after GC. A
+          fresh API call is made—completing the full lifecycle.
         </li>
       </ol>
       <p>

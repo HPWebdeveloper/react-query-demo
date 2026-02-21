@@ -3,55 +3,57 @@ import { useState } from "react";
 const steps = [
   {
     number: 1,
-    title: "Select a User",
-    element: "User 1 / User 2 / User 3 buttons",
-    action: "Click one of the three user buttons at the top of the demo.",
+    title: "Mount Your First User",
+    element: "🟢 Mount button on any user card (User 1, 2, or 3)",
+    action: 'Click the green "🟢 Mount" button on the User 1 panel.',
     expectation:
-      'React Query fetches data from the server for the first time. You\'ll see the status indicator show "⏳ Loading (First fetch)" briefly, then the user card appears with name, email, and the server timestamp. A stale-time countdown (30 s) starts immediately.',
+      "React Query fetches data from the server for the first time. You'll see \"⏳ Loading\" briefly, then the user's name, email, status, and server timestamp appear inside the card. The Observer count for User 1 changes to 1 (green), and the stale-time countdown (30 s) starts.",
     concept:
-      'This triggers useQuery with queryKey ["user", userId]. Since the cache is empty for this user, React Query makes a real network request.',
+      'Mounting the component triggers useQuery with queryKey ["user", 1]. Since no cache exists yet, React Query makes a real network request. The component becomes an "observer" of this query.',
   },
   {
     number: 2,
-    title: "Switch to Another User",
-    element: "User 1 / User 2 / User 3 buttons",
+    title: "Mount a Second User",
+    element: "🟢 Mount button on a different user card",
     action:
-      "Click a different user button (e.g. switch from User 1 to User 2).",
+      'While User 1 is still mounted, click "🟢 Mount" on the User 2 panel.',
     expectation:
-      "A new API call is made because User 2 has never been fetched. The stale-time countdown resets for User 2. User 1's data stays in the cache — its garbage-collection countdown (60 s) begins quietly in the background.",
+      "A new API call is made because User 2 has never been fetched. Both User 1 and User 2 are now mounted simultaneously — each with their own data, their own status, and their own countdowns. The Observer panel shows 1 for each.",
     concept:
-      'Each user has its own cache entry keyed by ["user", userId]. Switching users doesn\'t discard the old cache.',
+      'Each user has its own cache entry keyed by ["user", userId]. Mounting User 2 does NOT affect User 1\'s cache or state. This is the power of independent query keys.',
   },
   {
     number: 3,
-    title: "Switch Back to a Previously Fetched User",
-    element: "User 1 / User 2 / User 3 buttons",
+    title: "Unmount and Re-mount While Fresh",
+    element: "🔴 Unmount and 🟢 Mount buttons on the same user card",
     action:
-      "Click back on User 1 (or any user you already fetched) within 30 seconds.",
+      'Click "🔴 Unmount" on User 1, then immediately click "🟢 Mount" again (within 30 seconds of the original fetch).',
     expectation:
-      'The user card appears instantly with NO loading spinner and NO network request. Open the browser console — no new API call is logged. The status shows "✅ Cached".',
+      'The user card disappears on unmount, then reappears instantly on re-mount with NO loading spinner and NO network request. The status shows "✅ Cached". Check the console — no new API call was logged.',
     concept:
-      "The data is still within its staleTime (30 s), so React Query considers it fresh and serves it straight from the in-memory cache.",
+      "The data is still within its staleTime (30 s) and within gcTime (60 s), so React Query considers it fresh and serves it straight from the in-memory cache. This is why users experience instant page loads.",
   },
   {
     number: 4,
-    title: "Wait for Data to Become Stale",
-    element: "Stale-time countdown panel",
-    action: "Watch the blue stale-time countdown reach 0 s.",
+    title: "Watch Data Become Stale",
+    element: "⏱️ Freshness countdown panel in the right column",
+    action:
+      "Keep a user mounted and watch its blue freshness countdown reach 0 s.",
     expectation:
-      'The countdown label turns orange and reads "STALE". The data is still displayed, but React Query now considers it outdated. No refetch happens automatically at this moment — React Query waits for a trigger.',
+      'The countdown label turns orange and reads "STALE". The data is still displayed, but React Query now considers it outdated. No refetch happens automatically — React Query waits for a trigger like a remount or window focus.',
     concept:
-      "After staleTime expires, the cached data is marked stale. It remains usable, but the next trigger (component mount, window focus, or manual refetch) will cause a background refetch.",
+      "After staleTime (30 s) expires, the cached data is marked stale. It remains usable and displayed, but the next trigger (component remount, window focus, or manual refetch) will cause a background refetch.",
   },
   {
     number: 5,
     title: "Show the Child Component (Cache Sharing)",
-    element: '"Show Child Component" button inside the user card',
-    action: 'Click the purple "Show Child Component" button.',
+    element: '"Show Child Component" button inside a mounted user card',
+    action:
+      'Click the purple "Show Child Component" button inside any mounted user\'s card.',
     expectation:
-      "A child component appears below the user card showing the same user's name and email. If the data is still fresh, no network request is made at all. If the data is stale, React Query silently refetches in the background while instantly displaying the stale cached data.",
+      "A child component appears below the user data showing the same user's name and email. If the data is still fresh, no network request is made at all. If stale, React Query silently refetches in the background while instantly displaying the stale cached data. The Observer count for that user increases to 2.",
     concept:
-      'Both the parent (UserDataDisplay) and the child (ChildComponent) use the same queryKey ["user", userId]. React Query deduplicates requests and shares the same cache entry between all components that subscribe to the same key.',
+      'Both the parent (UserDataDisplay) and the child (ChildComponent) use the same queryKey ["user", userId]. React Query deduplicates requests and shares the same cache entry. The observer count increases because two components now watch this query.',
   },
   {
     number: 6,
@@ -59,51 +61,50 @@ const steps = [
     element: '"Hide Child Component" button',
     action: "Click the button again to hide the child component.",
     expectation:
-      "The child component disappears. The observer count for that query drops by one, but the parent still observes it, so no garbage-collection countdown starts.",
+      "The child component disappears. The observer count for that user's query drops back to 1 (the parent still observes it), so no garbage-collection countdown starts. The cache remains active.",
     concept:
-      "React Query tracks how many components (observers) are subscribed to each query. Garbage collection only begins when the observer count reaches zero.",
+      "React Query tracks how many components (observers) are subscribed to each query. Garbage collection only begins when the observer count reaches zero — which means the parent must also unmount.",
   },
   {
     number: 7,
-    title: "Unmount the Component",
-    element: '"🔴 Unmount Component" button',
-    action: 'Click the orange "Unmount Component" button.',
+    title: "Unmount a User",
+    element: '"🔴 Unmount" button on a specific user card',
+    action: 'Click the "🔴 Unmount" button on User 1\'s panel.',
     expectation:
-      "The user card and all child components disappear. The status indicators reset. Crucially, the garbage-collection countdown (60 s) starts ticking for the current user's cache entry. You can see it counting down in the yellow GC countdown panel.",
+      'User 1\'s data card disappears and the status changes to "○ Unmounted". The Observer count for User 1 drops to 0 (red, "GC eligible"). The GC countdown (60 s) begins ticking in the yellow ⏳ GC Countdown panel. Other mounted users are NOT affected.',
     concept:
       'When the component unmounts, the query has zero observers. React Query keeps the data in cache for gcTime (60 s) before permanently deleting it. This is the "grace period" that enables instant re-mounts.',
   },
   {
     number: 8,
     title: "Re-mount Before GC Expires",
-    element: '"🟢 Mount Component" button',
-    action:
-      'Click "Mount Component" before the garbage-collection countdown reaches 0.',
+    element: '"🟢 Mount" button on the same user card',
+    action: 'Click "🟢 Mount" on User 1 before the GC countdown reaches 0.',
     expectation:
-      "The user card reappears instantly with the cached data — no loading spinner, no network request. The GC countdown stops because the query has an observer again. If the data is stale, a silent background refetch happens.",
+      "User 1's card reappears instantly with the cached data — no loading spinner, no network request. The GC countdown stops because the query has an observer again. If the data is stale (staleTime already expired), a silent background refetch happens automatically.",
     concept:
-      "This is the power of gcTime: even after unmounting, cached data survives for 60 seconds. Re-mounting within that window gives users an instant experience.",
+      "This is the power of gcTime: even after unmounting, cached data survives for 60 seconds. Re-mounting within that window gives users an instant experience while keeping data fresh through background refetching.",
   },
   {
     number: 9,
     title: "Let Garbage Collection Remove the Cache",
-    element: "GC countdown + Garbage Collection Monitor",
+    element: "⏳ GC Countdown + 🗑️ Garbage Collection Events monitor",
     action:
-      "Unmount the component and wait for the full 60-second GC countdown to reach 0.",
+      "Unmount a user and wait for the full 60-second GC countdown to reach 0.",
     expectation:
-      "When the countdown hits 0, the Garbage Collection Monitor logs an event like '[\"user\", 1] removed at 12:34:56'. The data is permanently deleted from memory.",
+      'When the countdown hits 0, the Garbage Collection Events panel logs an event like \'["user", 1] removed at 12:34:56\'. The lifecycle flow for that user moves to the "Collected" stage. The data is permanently deleted from memory.',
     concept:
       "After gcTime expires with zero observers, React Query's garbage collector removes the cache entry entirely. The next mount will trigger a fresh network request as if the data was never fetched.",
   },
   {
     number: 10,
     title: "Mount After Garbage Collection",
-    element: '"🟢 Mount Component" button',
-    action: 'Click "Mount Component" after the GC event has been logged.',
+    element: '"🟢 Mount" button on the garbage-collected user card',
+    action: 'Click "🟢 Mount" on the user whose cache was just collected.',
     expectation:
-      'This time you see the "⏳ Loading" spinner again and a new API call in the console. The data is fetched from scratch because the cache was garbage collected.',
+      'This time you see the "⏳ Loading" state again and a new API call appears in the Network Activity Log and browser console. The data is fetched from scratch because the cache was garbage collected.',
     concept:
-      "With the cache entry removed, React Query treats this as a completely new query — demonstrating the full lifecycle from fetch → cache → stale → GC → re-fetch.",
+      "With the cache entry removed, React Query treats this as a completely new query — demonstrating the full lifecycle from fetch → cache → stale → GC → re-fetch. Try mounting multiple users to see this cycle independently for each one.",
   },
 ];
 
@@ -216,17 +217,23 @@ export default function InteractiveGuide() {
           </li>
           <li>
             <strong className="text-white">Watch the countdown timers</strong> —
-            the blue stale-time countdown shows freshness, and the yellow GC
+            the blue freshness countdown shows staleTime, and the yellow GC
             countdown shows how long until cache removal.
           </li>
           <li>
-            <strong className="text-white">Try rapid switching</strong> between
-            users to see how React Query prevents duplicate network requests.
+            <strong className="text-white">Mount multiple users at once</strong>{" "}
+            to see how each user's cache lifecycle runs independently —
+            different stale times, different GC countdowns.
           </li>
           <li>
             <strong className="text-white">Unmount → wait → re-mount</strong> at
             different intervals to feel the difference between instant cache
             hits and fresh fetches.
+          </li>
+          <li>
+            <strong className="text-white">Show child components</strong> on
+            different users to see observer counts increase — this proves cache
+            sharing between parent and child with no extra network requests.
           </li>
         </ul>
       </div>
