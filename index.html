@@ -68,7 +68,7 @@
         "@type": "WebApplication",
         "name": "React Query Demo",
         "url": "https://react-query.dev/",
-        "description": "An interactive visualization that makes React Query's caching, stale time, garbage collection, and data-sync behavior easy to grasp at a glance.",
+        "description": "An interactive visualization that makes React Query's caching, stale time, garbage collection, observer tracking, query lifecycle, network activity, and data-sync behavior easy to grasp at a glance.",
         "applicationCategory": "DeveloperApplication",
         "operatingSystem": "Any",
         "author": {
@@ -81,7 +81,7 @@
           "price": "0",
           "priceCurrency": "USD"
         },
-        "keywords": "React Query, TanStack Query, cache demo, data fetching, useQuery, stale time, gcTime, garbage collection"
+        "keywords": "React Query, TanStack Query, cache demo, data fetching, useQuery, stale time, gcTime, garbage collection, observer count, query lifecycle, network activity log, cache hit, background refetch"
       }
     </script>
 
@@ -136,7 +136,10 @@
         "description": "A 10-step interactive guide to understanding React Query's caching lifecycle — from first fetch through stale time, cache sharing, mount/unmount behavior, and garbage collection.",
         "totalTime": "PT5M",
         "tool": [
-          { "@type": "HowToTool", "name": "Modern web browser (Chrome, Firefox, Safari, or Edge)" },
+          {
+            "@type": "HowToTool",
+            "name": "Modern web browser (Chrome, Firefox, Safari, or Edge)"
+          },
           { "@type": "HowToTool", "name": "Browser DevTools console (F12)" }
         ],
         "step": [
@@ -223,16 +226,47 @@
       </p>
       <h2>How to Use This React Query Demo</h2>
       <ol>
-        <li><strong>Select a User</strong> — Click User 1, 2, or 3 to fetch data. React Query makes a real API call and starts a 30-second stale-time countdown.</li>
-        <li><strong>Switch Users</strong> — Click a different user. The previous user's data stays cached while a new fetch occurs.</li>
-        <li><strong>Switch Back</strong> — Return to a previously fetched user within 30 seconds. Data loads instantly from cache—no network request.</li>
-        <li><strong>Wait for Stale</strong> — After 30 seconds the data becomes stale (orange). React Query will refetch on the next trigger.</li>
-        <li><strong>Show Child Component</strong> — Click "Show Child Component" to see cache sharing. Both parent and child use the same cached data.</li>
-        <li><strong>Hide Child Component</strong> — Hiding the child reduces the observer count but the cache remains active.</li>
-        <li><strong>Unmount</strong> — Click "Unmount Component" to remove the UI. The 60-second garbage-collection countdown begins.</li>
-        <li><strong>Re-mount Before GC</strong> — Mount again before 60 seconds. Cached data appears instantly.</li>
-        <li><strong>Wait for Garbage Collection</strong> — Let the GC timer expire. The cache is permanently removed.</li>
-        <li><strong>Mount After GC</strong> — Mount again after GC. A fresh API call is made—completing the full lifecycle.</li>
+        <li>
+          <strong>Select a User</strong> — Click User 1, 2, or 3 to fetch data.
+          React Query makes a real API call and starts a 30-second stale-time
+          countdown.
+        </li>
+        <li>
+          <strong>Switch Users</strong> — Click a different user. The previous
+          user's data stays cached while a new fetch occurs.
+        </li>
+        <li>
+          <strong>Switch Back</strong> — Return to a previously fetched user
+          within 30 seconds. Data loads instantly from cache—no network request.
+        </li>
+        <li>
+          <strong>Wait for Stale</strong> — After 30 seconds the data becomes
+          stale (orange). React Query will refetch on the next trigger.
+        </li>
+        <li>
+          <strong>Show Child Component</strong> — Click "Show Child Component"
+          to see cache sharing. Both parent and child use the same cached data.
+        </li>
+        <li>
+          <strong>Hide Child Component</strong> — Hiding the child reduces the
+          observer count but the cache remains active.
+        </li>
+        <li>
+          <strong>Unmount</strong> — Click "Unmount Component" to remove the UI.
+          The 60-second garbage-collection countdown begins.
+        </li>
+        <li>
+          <strong>Re-mount Before GC</strong> — Mount again before 60 seconds.
+          Cached data appears instantly.
+        </li>
+        <li>
+          <strong>Wait for Garbage Collection</strong> — Let the GC timer
+          expire. The cache is permanently removed.
+        </li>
+        <li>
+          <strong>Mount After GC</strong> — Mount again after GC. A fresh API
+          call is made—completing the full lifecycle.
+        </li>
       </ol>
       <p>
         Visit <a href="https://react-query.dev/">react-query.dev</a> with

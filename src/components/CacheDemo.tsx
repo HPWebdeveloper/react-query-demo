@@ -17,7 +17,10 @@ import CacheTimeCountdown from "./CacheTimeCountdown";
 import GarbageCollectionCountdown from "./GarbageCollectionCountdown";
 import GarbageCollectionMonitor from "./GarbageCollectionMonitor";
 import MountControl from "./MountControl";
+import NetworkActivityLog from "./NetworkActivityLog";
+import ObserverCount from "./ObserverCount";
 import QueryConfiguration from "./QueryConfiguration";
+import QueryLifecycleFlow from "./QueryLifecycleFlow";
 import StatusIndicators from "./StatusIndicators";
 import TimeDisplay from "./TimeDisplay";
 import UserDataDisplay from "./UserDataDisplay";
@@ -94,6 +97,10 @@ function CacheDemo() {
 
       <QueryConfiguration staleTime={staleTime} gcTime={gcTime} />
 
+      <QueryLifecycleFlow />
+
+      <ObserverCount />
+
       <GarbageCollectionCountdown />
 
       <GarbageCollectionMonitor />
@@ -112,6 +119,8 @@ function CacheDemo() {
       />
 
       <MountControl isMounted={componentMounted} onToggle={handleMountToggle} />
+
+      <NetworkActivityLog />
 
       {/* {real mounting/unmounting happens here} */}
       {componentMounted && (
