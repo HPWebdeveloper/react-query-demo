@@ -17,6 +17,8 @@ function ChildComponent({ userId }: { userId: number }) {
   const { data, isLoading } = useQuery({
     queryKey: ["user", userId],
     queryFn: () => fetchUser(userId),
+    staleTime: 30000, // Must match parent — otherwise defaults to 0 and refetches on every mount
+    gcTime: 60000,
   });
 
   if (isLoading) return <div className="text-gray-300">Loading profile...</div>;
