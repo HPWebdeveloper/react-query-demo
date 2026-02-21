@@ -43,7 +43,7 @@ export default function UserDataDisplay({
   return (
     <>
       {isLoading && (
-        <div className="text-center py-8 text-gray-400">
+        <div className="text-center py-8 text-gray-300">
           Loading user data...
         </div>
       )}

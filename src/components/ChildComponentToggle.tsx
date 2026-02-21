@@ -16,7 +16,7 @@ function ChildComponentToggle({ userId }: ChildComponentToggleProps) {
       >
         {showProfile ? "Hide" : "Show"} Child Component
       </button>
-      <p className="text-xs text-gray-400 mt-2">
+      <p className="text-xs text-gray-300 mt-2">
         Child component will use the SAME cached data, no new API call!
       </p>
 

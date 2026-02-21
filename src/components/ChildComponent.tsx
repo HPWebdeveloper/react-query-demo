@@ -19,7 +19,7 @@ function ChildComponent({ userId }: { userId: number }) {
     queryFn: () => fetchUser(userId),
   });
 
-  if (isLoading) return <div className="text-gray-400">Loading profile...</div>;
+  if (isLoading) return <div className="text-gray-300">Loading profile...</div>;
 
   return (
     <div className="bg-purple-900/30 border border-purple-500/50 rounded-lg p-4 mt-4">
@@ -28,7 +28,7 @@ function ChildComponent({ userId }: { userId: number }) {
       </h4>
       <p className="text-sm text-gray-300">Name: {data?.name}</p>
       <p className="text-sm text-gray-300">Email: {data?.email}</p>
-      <p className="text-xs text-gray-500 mt-2">
+      <p className="text-xs text-gray-300 mt-2">
         Server fetched at: {data?.fetchedAt}
       </p>
       <p className="text-xs text-green-400 mt-1">

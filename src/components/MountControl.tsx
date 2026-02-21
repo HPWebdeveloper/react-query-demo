@@ -12,7 +12,7 @@ function MountControl({ isMounted, onToggle }: MountControlProps) {
       >
         {isMounted ? "🔴 Unmount Component" : "🟢 Mount Component"}
       </button>
-      <p className="text-xs text-gray-400 mt-2">
+      <p className="text-xs text-gray-300 mt-2">
         Toggle to ACTUALLY mount/unmount! Cache persists across mount cycles.
       </p>
     </div>

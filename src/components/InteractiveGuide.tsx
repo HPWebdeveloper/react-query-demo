@@ -118,7 +118,7 @@ export default function InteractiveGuide() {
       <h2 id="guide-heading" className="text-3xl font-semibold mb-2">
         📖 How to Use This React Query Demo
       </h2>
-      <p className="text-gray-400 mb-8 text-base">
+      <p className="text-gray-300 mb-8 text-base">
         Follow these 10 steps to explore React Query's complete caching
         lifecycle — from the first fetch, through stale time and cache sharing,
         all the way to garbage collection. Each step explains{" "}
@@ -162,7 +162,7 @@ export default function InteractiveGuide() {
                     </h3>
                   </div>
                   <span
-                    className={`text-gray-400 transition-transform ${
+                    className={`text-gray-300 transition-transform ${
                       isOpen ? "rotate-180" : ""
                     }`}
                   >
@@ -208,7 +208,7 @@ export default function InteractiveGuide() {
         <h3 className="font-semibold text-gray-200 mb-3">
           💡 Tips for Getting the Most Out of This Demo
         </h3>
-        <ul className="space-y-2 text-base text-gray-400">
+        <ul className="space-y-2 text-base text-gray-300">
           <li>
             <strong className="text-white">Open the browser console</strong>{" "}
             (F12 → Console) to see exactly when real API calls happen versus

@@ -76,20 +76,20 @@ function CacheTimeCountdown() {
               ? "text-blue-400"
               : isStale
               ? "text-orange-400"
-              : "text-gray-400"
+              : "text-gray-300"
           }`}
         >
           User {userId}
         </h5>
         <div className="text-center">
-          <div className="text-xs text-gray-400 mb-1">
+          <div className="text-xs text-gray-300 mb-1">
             <span
               className={
                 isActive
                   ? "text-purple-400"
                   : isStale
                   ? "text-orange-300"
-                  : "text-gray-500"
+                  : "text-gray-400"
               }
             >
               {data.queryKey || "—"}
@@ -101,7 +101,7 @@ function CacheTimeCountdown() {
                 ? "text-blue-400"
                 : isStale
                 ? "text-orange-400"
-                : "text-gray-600"
+                : "text-gray-400"
             }`}
           >
             {isActive ? `${data.countdown}s` : isStale ? "STALE" : "30s"}
@@ -113,7 +113,7 @@ function CacheTimeCountdown() {
 
   return (
     <div className="mb-6">
-      <h4 className="text-sm font-semibold text-gray-400 mb-3">
+      <h4 className="text-sm font-semibold text-gray-300 mb-3">
         ⏱️ Cache Freshness Countdown (staleTime)
       </h4>
       <div className="grid grid-cols-3 gap-4">
@@ -121,7 +121,7 @@ function CacheTimeCountdown() {
         {renderUserCountdown(2)}
         {renderUserCountdown(3)}
       </div>
-      <p className="text-xs text-gray-500 mt-3 text-center">
+      <p className="text-xs text-gray-400 mt-3 text-center">
         Data is fresh for 30s after fetch. At 0s, data becomes stale and will
         refetch on next access.
       </p>

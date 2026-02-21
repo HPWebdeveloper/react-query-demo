@@ -83,7 +83,7 @@ function CacheDemo() {
       <h2 className="text-3xl font-semibold mb-4">
         🗂️ React Query Cache Demo — staleTime, gcTime &amp; Garbage Collection
       </h2>
-      <p className="text-gray-400 mb-6 text-sm">
+      <p className="text-gray-300 mb-6 text-sm">
         Watch React Query's caching lifecycle in real time. This demo lets you
         observe how <strong>staleTime</strong>, <strong>gcTime</strong>,{" "}
         <strong>garbage collection</strong>, and{" "}

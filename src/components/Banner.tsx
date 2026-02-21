@@ -9,7 +9,7 @@ export default function Banner() {
         <h1 className="text-2xl font-bold mb-3">
           React Query Demo – Interactive Cache &amp; Data-Fetching Visualizer
         </h1>
-        <p className="text-sm md:text-base opacity-90 mb-1">
+        <p className="text-sm md:text-base mb-1">
           An interactive visualization by{" "}
           <a
             href="https://www.linkedin.com/in/hpwebdeveloper/"
@@ -20,7 +20,7 @@ export default function Banner() {
             Hamed Panjeh
           </a>
         </p>
-        <p className="text-sm md:text-base opacity-90 mb-2">
+        <p className="text-sm md:text-base mb-2">
           Explore how React Query (TanStack Query) handles caching, state
           management, data-sync, stale time, gcTime, garbage collection, and
           background refetching — all visualized in real time

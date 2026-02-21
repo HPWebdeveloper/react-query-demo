@@ -17,20 +17,20 @@ function QueryConfiguration({ staleTime, gcTime }: QueryConfigurationProps) {
       </h3>
       <div className="grid grid-cols-2 gap-3 text-xs">
         <div className="bg-gray-800/50 rounded p-2">
-          <span className="text-gray-400">staleTime:</span>{" "}
+          <span className="text-gray-300">staleTime:</span>{" "}
           <span className="text-yellow-400 font-mono">
             {staleTime}ms ({staleTime / 1000}s)
           </span>
-          <p className="text-gray-500 mt-1 text-[10px]">
+          <p className="text-gray-400 mt-1 text-xs">
             Data stays fresh for {staleTime / 1000}s
           </p>
         </div>
         <div className="bg-gray-800/50 rounded p-2">
-          <span className="text-gray-400">gcTime:</span>{" "}
+          <span className="text-gray-300">gcTime:</span>{" "}
           <span className="text-yellow-400 font-mono">
             {gcTime}ms ({gcTime / 1000}s)
           </span>
-          <p className="text-gray-500 mt-1 text-[10px]">Cache retention time</p>
+          <p className="text-gray-400 mt-1 text-xs">Cache retention time</p>
         </div>
       </div>
     </div>

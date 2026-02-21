@@ -17,7 +17,7 @@ function App() {
           <InteractiveGuide />
         </section>
       </main>
-      <footer className="text-center text-gray-500 text-xs py-6">
+      <footer className="text-center text-gray-400 text-xs py-6">
         <p>
           Built by{" "}
           <a

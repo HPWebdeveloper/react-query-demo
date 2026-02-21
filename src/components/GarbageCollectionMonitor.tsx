@@ -29,10 +29,10 @@ function GarbageCollectionMonitor() {
   if (gcEvents.length === 0) {
     return (
       <div className="mb-6 bg-gray-800/50 border border-gray-700 rounded-lg p-4">
-        <h4 className="text-sm font-semibold text-gray-400 mb-2">
+        <h4 className="text-sm font-semibold text-gray-300 mb-2">
           🗑️ Garbage Collection Monitor
         </h4>
-        <p className="text-xs text-gray-500">
+        <p className="text-xs text-gray-400">
           No cache entries removed yet. Unmount the component and wait {60}{" "}
           seconds to see garbage collection in action.
         </p>
@@ -52,13 +52,13 @@ function GarbageCollectionMonitor() {
             className="text-xs bg-red-900/20 border border-red-800/30 rounded px-3 py-2"
           >
             <span className="text-red-400 font-mono">{event.queryKey}</span>
-            <span className="text-gray-500 ml-2">
+            <span className="text-gray-400 ml-2">
               removed at {event.timestamp}
             </span>
           </div>
         ))}
       </div>
-      <p className="text-xs text-gray-500 mt-3">
+      <p className="text-xs text-gray-400 mt-3">
         Cache entries are removed after{" "}
         <strong className="text-white">gcTime (60s)</strong> of being unused.
       </p>

@@ -69,20 +69,20 @@ function GarbageCollectionCountdown() {
       >
         <h5
           className={`text-xs font-semibold mb-2 ${
-            isActive ? "text-yellow-400" : "text-gray-400"
+            isActive ? "text-yellow-400" : "text-gray-300"
           }`}
         >
           User {userId}
         </h5>
         <div className="text-center">
-          <div className="text-xs text-gray-400 mb-1">
-            <span className={isActive ? "text-purple-400" : "text-gray-500"}>
+          <div className="text-xs text-gray-300 mb-1">
+            <span className={isActive ? "text-purple-400" : "text-gray-400"}>
               {data.queryKey || "—"}
             </span>
           </div>
           <div
             className={`text-2xl font-bold mb-1 ${
-              isActive ? "text-yellow-400" : "text-gray-600"
+              isActive ? "text-yellow-400" : "text-gray-400"
             }`}
           >
             {isActive ? `${data.countdown}s` : "60s"}
@@ -94,7 +94,7 @@ function GarbageCollectionCountdown() {
 
   return (
     <div className="mb-6">
-      <h4 className="text-sm font-semibold text-gray-400 mb-3">
+      <h4 className="text-sm font-semibold text-gray-300 mb-3">
         ⏳ Garbage Collection Countdown for queryKey (cache key) = ["user",
         userId]
       </h4>
@@ -103,7 +103,7 @@ function GarbageCollectionCountdown() {
         {renderUserCountdown(2)}
         {renderUserCountdown(3)}
       </div>
-      <p className="text-xs text-gray-500 mt-3 text-center">
+      <p className="text-xs text-gray-400 mt-3 text-center">
         Countdown starts when component is unmounted. Cache removed at 0s.
       </p>
     </div>

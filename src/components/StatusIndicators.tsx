@@ -15,7 +15,7 @@ function StatusIndicators({
     <div className="bg-gray-800 rounded-lg p-4 mb-6">
       <div className="grid grid-cols-2 gap-4 text-sm">
         <div>
-          <span className="text-gray-400">Status:</span>{" "}
+          <span className="text-gray-300">Status:</span>{" "}
           <span
             className={
               isLoading
@@ -33,7 +33,7 @@ function StatusIndicators({
           </span>
         </div>
         <div>
-          <span className="text-gray-400">
+          <span className="text-gray-300">
             {dataUpdatedAt ? "Last Fetched:" : "Fetch Status:"}
           </span>{" "}
           <span className="text-white">
@@ -43,11 +43,11 @@ function StatusIndicators({
           </span>
         </div>
         <div>
-          <span className="text-gray-400">Selected User:</span>{" "}
+          <span className="text-gray-300">Selected User:</span>{" "}
           <span className="text-white">User {userId}</span>
         </div>
         <div>
-          <span className="text-gray-400">Cache Key:</span>{" "}
+          <span className="text-gray-300">Cache Key:</span>{" "}
           <span className="text-purple-400">["user", {userId}]</span>
         </div>
       </div>
