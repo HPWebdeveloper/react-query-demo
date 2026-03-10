@@ -68,27 +68,77 @@ function QueryConfiguration({ staleTime, gcTime }: QueryConfigurationProps) {
 
       {/* Lifecycle flow */}
       <div className="bg-gray-800/40 rounded p-3 border border-gray-700/50">
-        <p className="text-gray-400 text-[10px] uppercase tracking-wider font-semibold mb-2">
+        <p className="text-gray-400 text-[10px] uppercase tracking-wider font-semibold mb-3">
           Visual Mental Model
         </p>
-        <div className="font-mono text-xs leading-relaxed text-center">
-          <p className="text-cyan-400 font-semibold">Fetch</p>
-          <p className="text-gray-600">│</p>
-          <p className="text-gray-500 text-[10px]">
-            fresh (<span className="text-yellow-400">staleTime</span>)
-          </p>
-          <p className="text-gray-600">▼</p>
-          <p className="text-yellow-400 font-semibold">STALE</p>
-          <p className="text-gray-600">│</p>
-          <p className="text-gray-500 text-[10px]">component unmounts</p>
-          <p className="text-gray-600">▼</p>
-          <p className="text-orange-400 font-semibold">INACTIVE</p>
-          <p className="text-gray-600">│</p>
-          <p className="text-gray-500 text-[10px]">
-            <span className="text-yellow-400">gcTime</span> countdown
-          </p>
-          <p className="text-gray-600">▼</p>
-          <p className="text-red-400 font-semibold">GARBAGE COLLECTED</p>
+
+        <div className="flex gap-3">
+          {/* Main flow - left column */}
+          <div className="flex-1 font-mono text-xs leading-relaxed">
+            {/* Fetch */}
+            <div className="flex items-center gap-2 mb-1">
+              <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-cyan-500/20 text-cyan-400 text-[10px] font-bold shrink-0">1</span>
+              <span className="text-cyan-400 font-semibold text-sm">Fetch</span>
+            </div>
+            <div className="ml-2.5 border-l-2 border-cyan-500/30 pl-4 py-1">
+              <span className="text-gray-500 text-[10px]">
+                fresh (<span className="text-yellow-400">staleTime</span>)
+              </span>
+            </div>
+
+            {/* Stale */}
+            <div className="flex items-center gap-2 mb-1">
+              <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-yellow-500/20 text-yellow-400 text-[10px] font-bold shrink-0">2</span>
+              <span className="text-yellow-400 font-semibold text-sm">STALE</span>
+            </div>
+            <div className="ml-2.5 border-l-2 border-yellow-500/30 pl-4 py-1">
+              <span className="text-gray-500 text-[10px]">component unmounts</span>
+            </div>
+
+            {/* Inactive */}
+            <div className="flex items-center gap-2 mb-1">
+              <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-orange-500/20 text-orange-400 text-[10px] font-bold shrink-0">3</span>
+              <span className="text-orange-400 font-semibold text-sm">INACTIVE</span>
+            </div>
+            <div className="ml-2.5 border-l-2 border-orange-500/30 pl-4 py-1 space-y-0.5">
+              <span className="text-gray-500 text-[10px]">
+                <span className="text-yellow-400">gcTime</span> countdown
+              </span>
+              <br />
+              <span className="text-gray-400 text-[10px] italic">
+                React Query returns cached data immediately and then triggers background refetch
+              </span>
+            </div>
+
+            {/* Garbage Collected */}
+            <div className="flex items-center gap-2">
+              <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-red-500/20 text-red-400 text-[10px] font-bold shrink-0">4</span>
+              <span className="text-red-400 font-semibold text-sm">GARBAGE COLLECTED</span>
+            </div>
+          </div>
+
+          {/* Right column - remount during gcTime */}
+          <div className="flex-1 font-mono text-xs border-l border-dashed border-gray-600/50 pl-3">
+            <p className="text-gray-400 text-[10px] uppercase tracking-wider font-semibold mb-2">
+              If component mounts during gcTime
+            </p>
+            <div className="space-y-1">
+              <div className="flex items-center gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-green-400 shrink-0" />
+                <span className="text-green-400">cached data appears instantly</span>
+              </div>
+              <div className="text-gray-600 ml-[3px] text-xs">↓</div>
+              <div className="flex items-center gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-blue-400 shrink-0" />
+                <span className="text-blue-400">background fetch starts</span>
+              </div>
+              <div className="text-gray-600 ml-[3px] text-xs">↓</div>
+              <div className="flex items-center gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-purple-400 shrink-0" />
+                <span className="text-purple-400">UI updates with new data</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
